@@ -7,6 +7,8 @@ pygame.init()
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("A New World")
 FONT = pygame.font.SysFont("comicsans", 16)
+LOGO = pygame.image.load('graphics/logo.png')
+pygame.display.set_icon(LOGO)
 
 
 def main():
