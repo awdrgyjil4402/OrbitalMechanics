@@ -1,5 +1,5 @@
 # A New World
-___
+
 A New World is a space game based on real physics. 
 
 ## Play
