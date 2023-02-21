@@ -18,7 +18,9 @@ class Object:
         self.image = pygame.image.load('graphics/spacecraft.png')
 
         self.orbit = []
-        self.sun = False
+        self.prev_x = []
+        self.prev_y = []
+        self.orbited = False
         self.spacecraft = False
         self.distance_to_sun = 0
 
@@ -31,14 +33,29 @@ class Object:
         self.win = win
 
         if len(self.orbit) > 2:
-            updated_points = []
-            for point in self.orbit:
-                x, y = point
-                x = x * self.SCALE + WIDTH / 2
-                y = y * self.SCALE + HEIGHT / 2
-                updated_points.append((x, y))
+            if self.spacecraft:
+                updated_points = []
+                for point in self.orbit:
+                    x, y = point
+                    x = x * self.SCALE + WIDTH / 2
+                    y = y * self.SCALE + HEIGHT / 2
+                    updated_points.append((x, y))
 
-            pygame.draw.lines(win, self.color, False, updated_points, 2)
+                if len(self.orbit) > 30:
+                    del self.orbit[0]
+
+
+                pygame.draw.lines(win, DEEP_BLUE, False, updated_points, 3)
+
+            else:
+                updated_points = []
+                for point in self.orbit:
+                    x, y = point
+                    x = x * self.SCALE + WIDTH / 2
+                    y = y * self.SCALE + HEIGHT / 2
+                    updated_points.append((x, y))
+
+                pygame.draw.lines(win, self.color, False, updated_points, 2)
 
             # if self.spacecraft:
             #     self.win.blit(self.image, (x - 7, y - 7))
@@ -63,7 +80,7 @@ class Object:
         distance_y = other_y - self.y
         distance = math.sqrt(distance_x ** 2 + distance_y ** 2)
 
-        if other.sun:
+        if other.orbited:
             self.distance_to_sun = distance
 
         force = self.G * self.mass * other.mass / distance ** 2
@@ -75,7 +92,7 @@ class Object:
     def update(self, planets):
         total_fx = total_fy = 0
         for planet in planets:
-            if self == planet:  #Don't update the sun
+            if self == planet:  #Don't update the orbited
                 continue
 
             fx, fy = self.attraction(planet)
@@ -88,6 +105,8 @@ class Object:
         self.x += self.x_vel * self.TIMESTEP
         self.y += self.y_vel * self.TIMESTEP
         self.orbit.append((self.x, self.y))
+
+
 
         if self.spacecraft:
             self.input()

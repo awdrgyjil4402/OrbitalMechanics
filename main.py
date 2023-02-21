@@ -13,14 +13,14 @@ def main():
     run = True
     clock = pygame.time.Clock()
 
-    sun = Object(0, 0, 30, YELLOW, 1.98892 * 10 ** 30)
-    sun.sun = True
+    sun = Object(0, 0, 100, BLUE, 1.98892 * 10 ** 30)
+    sun.orbited = True
 
-    earth = Object(-1 * Object.AU, 0, 16, BLUE, 5.9742 * 10 ** 24)
-    earth.y_vel = 29.783 * 1000
+    earth = Object(-1.524 * Object.AU, 0, 16, WHITE, 5.9742 * 10 ** 24)
+    earth.y_vel = 24.077 * 1000
 
-    spacecraft1 = Object(-1.524 * Object.AU, 0, 5, DARK_GREY, 1000)
-    spacecraft1.y_vel = 24.077 * 1000
+    spacecraft1 = Object(-1 * Object.AU, 0, 5, DARK_GREY, 1000)
+    spacecraft1.y_vel = 29.783 * 1000
     spacecraft1.spacecraft = True
 
     objects = [sun, earth, spacecraft1]
