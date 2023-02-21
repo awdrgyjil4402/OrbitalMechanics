@@ -44,7 +44,6 @@ class Object:
                 if len(self.orbit) > 30:
                     del self.orbit[0]
 
-
                 pygame.draw.lines(win, DEEP_BLUE, False, updated_points, 3)
 
             else:
