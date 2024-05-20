@@ -1,5 +1,5 @@
 import pygame
-from objects import Object
+from objects import Planet, Spacecraft
 from values import *
 
 pygame.init()
@@ -15,17 +15,16 @@ def main():
     run = True
     clock = pygame.time.Clock()
 
-    sun = Object(0, 0, 100, BLUE, 1.98892 * 10 ** 30)
-    sun.orbited = True
+    earth = Planet(0, 0, 100, BLUE, 1.98892 * 10 ** 30)
+    earth.orbited = True
 
-    earth = Object(-1.524 * Object.AU, 0, 16, WHITE, 5.9742 * 10 ** 24)
-    earth.y_vel = 24.077 * 1000
+    moon = Planet(-1.524 * Planet.AU, 0, 16, WHITE, 5.9742 * 10 ** 24)
+    moon.y_vel = 24.077 * 1000
 
-    spacecraft1 = Object(-1 * Object.AU, 0, 5, DARK_GREY, 1000)
+    spacecraft1 = Spacecraft(-1 * Spacecraft.AU, 0, 1000)
     spacecraft1.y_vel = 29.783 * 1000
-    spacecraft1.spacecraft = True
 
-    objects = [sun, earth, spacecraft1]
+    objects = [earth,moon, spacecraft1]
 
     while run:
         clock.tick(60)
